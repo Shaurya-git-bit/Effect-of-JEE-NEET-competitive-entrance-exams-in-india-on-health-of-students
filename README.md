@@ -73,6 +73,21 @@ This held up statistically (Mann-Whitney U, p < 0.0001) and suggests that the to
 
 ---
 
+# In Their Own Words
+
+> "It broke my confidence and self esteem in such a way that even though I became a doctor after getting multiple gold medals during college, I still feel I'm not good enough."
+> — IIT/AIIMS graduate
+
+> "Life feels like we are putting brakes on life before turning 18."
+
+> "The exam and the journey takes away your happiness, potential, confidence, sleep, peace and gives you anxiety, panics, bad moods."
+
+> "I hate what I have become after this. I know I will get in this year but how things turned out, I don't love myself anymore for it."
+
+> "I lost everything in my drop year. I got depressed, suicidal. I wouldn't want whatever I suffered on anyone."
+
+> "It took my 4 years, gave me anxiety and insomnia. Exams like these shouldn't be fixated on kids with above average grades — it's murder of their self-esteem."
+
 ## Headline Numbers
 
 | Metric | Value |
