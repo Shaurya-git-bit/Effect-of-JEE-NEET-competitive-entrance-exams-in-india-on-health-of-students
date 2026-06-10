@@ -126,8 +126,6 @@ Statistical tests used: Mann-Whitney U (for comparing scale scores between group
 
 ## About
 
-This research was conducted independently during a gap year. It is ongoing, with a paper currently in preparation for submission to a peer-reviewed journal.
-
 If you are interested in this data, feel free to reach out or open an issue on this repository.
 
 ---
