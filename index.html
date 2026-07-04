@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta property="og:title" content="The Hidden Cost of Cracking India's Toughest Exams" />
+<meta property="og:description" content="An anonymous survey of 335 JEE and NEET aspirants reveals the mental, physical and social toll of India's most competitive exams." />
+<meta property="og:url" content="https://my-project-wheat-psi-60.vercel.app" />
+<title>The Hidden Cost of Cracking India's Toughest Exams</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Lucide Icons (for clean SVG icons) -->
+<script src="https://unpkg.com/lucide@latest">
+</script>
+
+<style>
+/* ------------------------------------------------------------------
+   TYPOGRAPHY & VARIABLES
+   --------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+:root {
+    --bg: #0a0c14;
+    --surface: #13161f;
+    --surface-light: #1b1f2b;
+    --text: #eceef2;
+    --muted: #8b93a8;
+    --muted-light: #5a6278;
+    --accent: #d97746;        /* muted orange */
+    --accent-soft: rgba(217,119,70,0.12);
+    --border: rgba(255,255,255,0.06);
+    --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+.container { width: min(1100px, 92%); margin: 0 auto; }
+section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+section:last-of-type { border-bottom: none; }
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+h1 { font-size: clamp(2.8rem, 5.5vw, 4.8rem); line-height: 1.08; }
+h2 { font-size: clamp(2rem, 3.2vw, 2.8rem); margin-bottom: 1.5rem; letter-spacing: -0.025em; }
+h3 { font-size: 1.6rem; margin-bottom: 0.8rem; letter-spacing: -0.015em; }
+h4 { font-size: 1.2rem; font-weight: 600; }
+
+p { margin-bottom: 1.2rem; color: var(--muted); }
+.subtitle { font-size: 1.15rem; color: var(--muted); max-width: 700px; }
+
+/* ------------------------------------------------------------------
+   PROGRESS BAR (fixed top)
+   --------------------------------------------------------------- */
+#progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--accent);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s linear;
+}
+
+/* ------------------------------------------------------------------
+   NAVIGATION
+   --------------------------------------------------------------- */
+nav {
+    position: fixed;
+    top: 3px;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10,12,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+.logo span { color: var(--accent); }
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+.nav-links a:hover { color: white; }
+
+/* ------------------------------------------------------------------
+   HERO – editorial opening
+   --------------------------------------------------------------- */
+.hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    border-bottom: 1px solid var(--border);
+}
+.hero-content { max-width: 900px; }
+.hero .meta {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-light);
+    margin-bottom: 2rem;
+}
+.hero h1 {
+    margin-bottom: 1.5rem;
+}
+.hero .lead {
+    font-size: 1.3rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin-bottom: 2rem;
+}
+.hero .highlight-stat {
+    background: var(--surface);
+    padding: 1.8rem 2.2rem;
+    border-left: 4px solid var(--accent);
+    margin: 2rem 0;
+    max-width: 650px;
+}
+.hero .highlight-stat .number {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+.hero .highlight-stat .label {
+    font-size: 1.1rem;
+    color: var(--text);
+}
+.hero .cta {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 2.2rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.2s;
+    color: var(--text);
+}
+.hero .cta:hover {
+    background: var(--surface);
+    border-color: var(--accent);
+}
+
+/* ------------------------------------------------------------------
+   METHODOLOGY – clean, no cards
+   --------------------------------------------------------------- */
+.methodology-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+.methodology-grid ul {
+    list-style: none;
+    padding: 0;
+    color: var(--muted);
+}
+.methodology-grid ul li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 1.2rem;
+}
+.methodology-grid ul li strong {
+    color: var(--text);
+    min-width: 130px;
+}
+.methodology-grid .note {
+    font-size: 0.95rem;
+    color: var(--muted-light);
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* ------------------------------------------------------------------
+   FINDINGS – editorial, minimal cards
+   --------------------------------------------------------------- */
+.finding {
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.finding.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.finding:last-of-type { border-bottom: none; }
+
+.finding-number {
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+    margin-bottom: -0.8rem;
+}
+.finding-header h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+}
+.finding-header .sub {
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+
+.pull-quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 400;
+    color: #d6dbe5;
+    line-height: 1.4;
+    margin: 1.5rem 0 2rem;
+    padding-left: 1.8rem;
+    border-left: 3px solid var(--accent);
+    max-width: 80%;
+}
+
+.chart-wrapper {
+    background: var(--surface);
+    padding: 2rem 2rem 1.5rem;
+    border: 1px solid var(--border);
+    margin: 1.5rem 0 0.8rem;
+}
+.chart-wrapper canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 320px;
+}
+
+.chart-caption {
+    margin-top: 1rem;
+}
+.chart-caption .insight {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+}
+.chart-caption .source {
+    font-size: 0.8rem;
+    color: var(--muted-light);
+}
+
+/* ------------------------------------------------------------------
+   ACHIEVEMENT BOX (finding 5)
+   --------------------------------------------------------------- */
+.achievement-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+.big-number {
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+.split-stat {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 2rem;
+}
+.split-stat strong {
+    display: block;
+    font-size: 2.2rem;
+}
+.split-stat span { color: var(--muted); }
+
+.quote-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+.quote-block {
+    background: var(--surface);
+    padding: 1.5rem 2rem;
+    border-left: 3px solid var(--accent);
+    font-style: italic;
+    color: #d6dbe5;
+}
+.quote-block .attribution {
+    display: block;
+    margin-top: 0.8rem;
+    font-style: normal;
+    font-size: 0.85rem;
+    color: var(--accent);
+}
+
+/* ------------------------------------------------------------------
+   SOCIAL SHARE & CITATION
+   --------------------------------------------------------------- */
+.social-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2.5rem;
+}
+.social-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.6rem 1.4rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.social-btn:hover {
+    background: var(--surface);
+    border-color: var(--muted-light);
+}
+.social-btn.citation {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+.social-btn.citation:hover {
+    background: #c05f2e;
+}
+
+/* ------------------------------------------------------------------
+   DISCUSSION / LIMITATIONS (replace recommendations)
+   --------------------------------------------------------------- */
+.discussion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+.discussion-grid h4 {
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+.discussion-grid p {
+    font-size: 0.98rem;
+    color: var(--muted);
+}
+
+/* ------------------------------------------------------------------
+   DATASET & REPRODUCIBILITY
+   --------------------------------------------------------------- */
+.dataset-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.dataset-box .left { flex: 2; }
+.dataset-box .left p { margin-bottom: 0.4rem; }
+.dataset-box .right { flex: 1; text-align: right; }
+.dataset-box .right a {
+    display: inline-block;
+    padding: 0.6rem 1.6rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+.dataset-box .right a:hover {
+    background: var(--surface-light);
+    border-color: var(--accent);
+}
+
+.cite-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    margin-top: 2rem;
+}
+.cite-box .cite-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--border);
+    margin: 1rem 0 1.5rem;
+    line-height: 1.7;
+    word-break: break-word;
+}
+.cite-box button {
+    background: var(--accent);
+    border: none;
+    color: white;
+    padding: 0.6rem 1.6rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.cite-box button:hover { background: #c05f2e; }
+
+/* ------------------------------------------------------------------
+   ASK THE DATASET (AI assistant) – now a section
+   --------------------------------------------------------------- */
+.ai-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.ai-section .ai-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ai-section .ai-header h3 {
+    margin: 0;
+}
+.ai-section .ai-desc {
+    color: var(--muted);
+    max-width: 700px;
+}
+.ai-section .ai-launcher {
+    align-self: flex-start;
+    padding: 0.7rem 2rem;
+    background: var(--accent);
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: 0.2s;
+}
+.ai-section .ai-launcher:hover {
+    background: #c05f2e;
+}
+
+/* ------------------------------------------------------------------
+   RESEARCHER
+   --------------------------------------------------------------- */
+.researcher-box {
+    padding: 0.5rem 0;
+}
+.researcher-box h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+.researcher-box .bio {
+    max-width: 700px;
+    color: var(--muted);
+}
+.badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.2rem;
+    margin-top: 1.5rem;
+}
+.badge {
+    font-size: 0.8rem;
+    color: var(--muted-light);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+.badge::before {
+    content: "·";
+    margin-right: 0.4rem;
+    color: var(--accent);
+}
+.badge:first-child::before { content: ""; margin:0; }
+
+/* ------------------------------------------------------------------
+   FOOTER – expanded, professional
+   --------------------------------------------------------------- */
+footer {
+    padding: 3rem 0 2rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.footer-grid h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    margin-bottom: 0.8rem;
+}
+.footer-grid ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-grid ul li {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+}
+.footer-grid ul li a {
+    color: var(--muted);
+    transition: 0.2s;
+}
+.footer-grid ul li a:hover {
+    color: white;
+}
+.footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--muted-light);
+}
+.footer-bottom .copy {
+    color: var(--muted-light);
+}
+
+/* ------------------------------------------------------------------
+   CHAT DRAWER (unchanged functionality, only visual)
+   --------------------------------------------------------------- */
+.chat-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100vh;
+    width: 45%;
+    min-width: 30vw;
+    max-width: 70vw;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    z-index: 9999;
+    transform: translateX(105%);
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 8px 0 40px rgba(0,0,0,0.6);
+}
+.chat-drawer.open { transform: translateX(0); }
+.chat-resize-handle {
+    position: absolute;
+    left: -6px; top: 0;
+    width: 12px; height: 100%;
+    cursor: ew-resize;
+    z-index: 10;
+    background: transparent;
+    transition: background 0.2s;
+}
+.chat-resize-handle:hover,
+.chat-resize-handle.active { background: rgba(217,119,70,0.15); }
+.chat-resize-handle::after {
+    content: "⋮";
+    position: absolute;
+    right: 2px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted-light);
+    font-size: 1.2rem;
+    opacity: 0.3;
+    letter-spacing: 4px;
+}
+.chat-header {
+    padding: 1.2rem 1.8rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+.chat-header h4 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+    letter-spacing: -0.01em;
+}
+.chat-header h4 span { color: var(--accent); }
+.chat-header .close-btn {
+    background: none;
+    border: none;
+    color: var(--muted-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+    line-height: 1;
+    padding: 0 0.5rem;
+}
+.chat-header .close-btn:hover { color: white; }
+.chat-messages {
+    flex: 1;
+    padding: 1.5rem 1.8rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    scroll-behavior: smooth;
+}
+.chat-messages .message {
+    max-width: 86%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap;
+    animation: msgIn 0.2s ease;
+}
+.chat-messages .message.user {
+    align-self: flex-end;
+    background: var(--accent);
+    color: white;
+}
+.chat-messages .message.assistant {
+    align-self: flex-start;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+.chat-messages .typing-indicator {
+    align-self: flex-start;
+    background: var(--surface);
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    color: var(--muted-light);
+    border: 1px solid var(--border);
+}
+.chat-messages .typing-indicator span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--muted-light);
+    border-radius: 50%;
+    animation: bounce 1.2s infinite ease-in-out;
+}
+.chat-messages .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.chat-messages .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+@keyframes msgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.chat-input-area {
+    padding: 1rem 1.8rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 0.8rem;
+    flex-shrink: 0;
+    background: var(--bg);
+}
+.chat-input-area input {
+    flex: 1;
+    padding: 0.7rem 1.2rem;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.chat-input-area input:focus { border-color: var(--accent); }
+.chat-input-area input::placeholder { color: var(--muted-light); }
+.chat-input-area button {
+    padding: 0.7rem 1.6rem;
+    background: var(--accent);
+    border: none;
+    border-radius: 2px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.chat-input-area button:hover { background: #c05f2e; }
+.chat-input-area button:disabled { opacity: 0.4; cursor: default; }
+
+/* CHAT LAUNCHER – subtle, not a bubble */
+.chat-launcher {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9998;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.6rem 1.2rem;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.chat-launcher:hover {
+    background: var(--surface-light);
+    border-color: var(--accent);
+}
+.chat-launcher .icon {
+    display: inline-flex;
+    align-items: center;
+}
+.chat-launcher.open {
+    display: none; /* hides when chat is open */
+}
+
+/* ------------------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .nav-links { display: none; }
+    .methodology-grid { grid-template-columns: 1fr; }
+    .discussion-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .quote-grid { grid-template-columns: 1fr; }
+    .split-stat { gap: 2rem; }
+    .hero .highlight-stat .number { font-size: 2.2rem; }
+    .pull-quote { font-size: 1.2rem; max-width: 100%; }
+    .chat-drawer { width: 80vw; min-width: 70vw; max-width: 90vw; }
+}
+@media (max-width: 600px) {
+    section { padding: 60px 0; }
+    .hero { min-height: 70vh; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .dataset-box { flex-direction: column; align-items: flex-start; }
+    .dataset-box .right { text-align: left; }
+    .ai-section { padding: 1.5rem; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="container nav-inner">
+        <div class="logo"><span>⟡</span> Hidden Cost Research</div>
+        <div class="nav-links">
+            <a href="#methodology">Methodology</a>
+            <a href="#findings">Findings</a>
+            <a href="#discussion">Discussion</a>
+            <a href="#dataset">Dataset</a>
+            <a href="#ask-ai">Ask AI</a>
+            <a href="#researcher">Researcher</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- HERO – Editorial, no stats cards                              -->
+<!-- ============================================================ -->
+<section class="hero">
+    <div class="container hero-content">
+        <div class="meta">Independent Research · Ongoing Study · Updated approximately every two weeks</div>
+        <h1>The Hidden Cost of Cracking India's Toughest Exams</h1>
+        <p class="lead">
+            An anonymous survey of 335 JEE and NEET aspirants reveals the mental, physical, and social toll of a system that prizes results above wellbeing.
+        </p>
+
+        <div class="highlight-stat">
+            <div class="number">80%</div>
+            <div class="label">of respondents experienced burnout during preparation — yet only 26% would choose the same path again.</div>
+        </div>
+
+        <a href="#findings" class="cta">Read the full report →</a>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- METHODOLOGY                                                   -->
+<!-- ============================================================ -->
+<section id="methodology">
+    <div class="container">
+        <h2>Methodology</h2>
+        <p class="subtitle">How the data was collected and analysed.</p>
+        <div class="methodology-grid">
+            <div>
+                <p>This independent, anonymous survey was designed to quantify the costs of preparing for India's JEE and NEET exams. 335 current and former aspirants responded between March and May 2026.</p>
+                <p>The survey was distributed online through student forums and social media. All responses were anonymous, and no personal identifying information was collected.</p>
+                <div class="note">Limitations: Self‑reported data, non‑random sample. Findings are exploratory and not generalisable to the entire population.</div>
+            </div>
+            <div>
+                <ul>
+                    <li><strong>Sample size</strong> 335</li>
+                    <li><strong>Period</strong> March – May 2026</li>
+                    <li><strong>Distribution</strong> Online (social media, forums)</li>
+                    <li><strong>Anonymity</strong> Fully anonymous</li>
+                    <li><strong>Age range</strong> 16–21 (majority 17–19)</li>
+                    <li><strong>Funding</strong> Independent, no institutional backing</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FINDINGS                                                      -->
+<!-- ============================================================ -->
+<section id="findings">
+    <div class="container">
+        <h2>Key Findings</h2>
+        <p class="subtitle">Five patterns that emerged from the data.</p>
+
+        <!-- FINDING 1 -->
+        <div class="finding">
+            <div class="finding-number">01</div>
+            <div class="finding-header">
+                <h3>Parental Pressure &amp; Burnout</h3>
+                <div class="sub">The relationship between family expectations and student mental health.</div>
+            </div>
+            <div class="pull-quote">
+                “As parental pressure increases, burnout rates climb sharply — reaching 93% among those with very high pressure.”
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="burnoutChart"></canvas>
+            </div>
+            <div class="chart-caption">
+                <div class="insight"> Students with very high parental pressure were 93% likely to experience burnout — vs 60% with low pressure.</div>
+                <div class="source">Source: Independent Survey, March–May 2026 · n=335</div>
+            </div>
+        </div>
+
+        <!-- FINDING 2 -->
+        <div class="finding">
+            <div class="finding-number">02</div>
+            <div class="finding-header">
+                <h3>Parental Pressure &amp; Career Satisfaction</h3>
+                <div class="sub">Long‑term satisfaction after the preparation journey.</div>
+            </div>
+            <div class="pull-quote">
+                “Higher parental pressure correlates with lower career satisfaction, dropping from 2.72 to 2.09 on a 5‑point scale.”
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="satisfactionChart"></canvas>
+            </div>
+            <div class="chart-caption">
+                <div class="insight">Career satisfaction falls as pressure rises — from 2.72 (low) to 2.09 (very high).</div>
+                <div class="source">Source: Independent Survey, March–May 2026 · n=335</div>
+            </div>
+        </div>
+
+        <!-- FINDING 3 -->
+        <div class="finding">
+            <div class="finding-number">03</div>
+            <div class="finding-header">
+                <h3>Non‑Academic Skills &amp; Long‑Term Outcomes</h3>
+                <div class="sub">Whether developing skills outside academics influenced later satisfaction.</div>
+            </div>
+            <div class="pull-quote">
+                “Students who developed non‑academic skills reported higher career satisfaction and social confidence — gaps of 0.6 and 1.0 points respectively.”
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="skillsChart"></canvas>
+            </div>
+            <div class="chart-caption">
+                <div class="insight">Those with non‑academic skills scored 2.87 vs 2.27 on career satisfaction, and 3.31 vs 2.33 on social confidence.</div>
+                <div class="source">Source: Independent Survey, March–May 2026 · n=335</div>
+            </div>
+        </div>
+
+        <!-- FINDING 4 -->
+        <div class="finding">
+            <div class="finding-number">04</div>
+            <div class="finding-header">
+                <h3>Years of Preparation &amp; Regret</h3>
+                <div class="sub">How extended preparation relates to regret after the journey.</div>
+            </div>
+            <div class="pull-quote">
+                “Regret increases with preparation years: 80% of those with 3+ years regret the path, compared to 45% with no drop year.”
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="regretChart"></canvas>
+            </div>
+            <div class="chart-caption">
+                <div class="insight">80% of students who spent 3+ years preparing reported regret — the highest of any group.</div>
+                <div class="source">Source: Independent Survey, March–May 2026 · n=335</div>
+            </div>
+        </div>
+
+        <!-- FINDING 5 -->
+        <div class="finding">
+            <div class="finding-number">05</div>
+            <div class="finding-header">
+                <h3>Even Among Those Who Made It</h3>
+                <div class="sub">Success did not eliminate the psychological cost.</div>
+            </div>
+            <div class="pull-quote">
+                “Only 8 of 30 IIT/AIIMS students would recommend the preparation path — success doesn’t erase the cost.”
+            </div>
+
+            <div class="achievement-box">
+                <div class="big-number">30</div>
+                <p>Respondents reached IIT or AIIMS.</p>
+                <div class="split-stat">
+                    <div><strong>8</strong><span>Would recommend the path</span></div>
+                    <div><strong>13</strong><span>Would not recommend it</span></div>
+                </div>
+            </div>
+
+            <div class="quote-grid">
+                <div class="quote-block">
+                    “It broke my confidence and self‑esteem in such a way that even though I became a doctor after getting multiple gold medals during college, I still feel I'm not good enough.”
+                    <span class="attribution">— AIIMS graduate</span>
+                </div>
+                <div class="quote-block">
+                    “Always feeling inadequate and dissatisfied even if I am doing significantly well in life.”
+                    <span class="attribution">— IIT student</span>
+                </div>
+            </div>
+
+            <div class="chart-caption">
+                <div class="insight">Even among top achievers, the psychological toll persists — a clear signal that structural change is needed.</div>
+                <div class="source">Source: Independent Survey, March–May 2026 · n=335</div>
+            </div>
+        </div>
+
+        <!-- SOCIAL SHARE & CITATION -->
+        <div class="social-row">
+            <button class="social-btn" onclick="window.open('https://twitter.com/intent/tweet?text=The%20Hidden%20Cost%20of%20Cracking%20India%27s%20Toughest%20Exams%20-%20new%20survey%20of%20335%20aspirants%20shows%20stark%20mental%20health%20costs.&url='+encodeURIComponent(window.location.href),'_blank')">
+                <i data-lucide="twitter" style="width:16px;height:16px;"></i> Share on X
+            </button>
+            <button class="social-btn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.href),'_blank')">
+                <i data-lucide="linkedin" style="width:16px;height:16px;"></i> Share on LinkedIn
+            </button>
+            <button class="social-btn citation" onclick="copyCitation()">
+                <i data-lucide="copy" style="width:16px;height:16px;"></i> Copy Citation
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- VOICES (CAROUSEL) – unchanged, only styling                   -->
+<!-- ============================================================ -->
+<section id="voices">
+    <div class="container">
+        <h2>In Their Own Words</h2>
+        <p class="subtitle">Anonymous reflections from students who experienced the preparation journey.</p>
+        <div class="carousel-wrapper" style="margin-top:2rem; display:flex; align-items:center; gap:1.2rem;">
+            <button class="carousel-btn prev" onclick="previousQuote()" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:0.5rem 1rem; cursor:pointer; font-size:1.5rem;">‹</button>
+            <div class="carousel" style="flex:1; min-height:200px; position:relative;">
+                <div class="quote-slide active" style="display:block; background:var(--surface); border:1px solid var(--border); padding:2rem; border-radius:2px; font-size:1.3rem; font-style:italic; line-height:1.5;">
+                    "It destroyed my precious years. I always wanted to pursue a career in CS. It destroyed that dream too."
+                </div>
+                <div class="quote-slide" style="display:none; background:var(--surface); border:1px solid var(--border); padding:2rem; border-radius:2px; font-size:1.3rem; font-style:italic; line-height:1.5;">
+                    "A major part of why I struggled was coaching. I put in a lot of effort but was misguided by my teachers. By the time I realised it, it was too late."
+                </div>
+                <div class="quote-slide" style="display:none; background:var(--surface); border:1px solid var(--border); padding:2rem; border-radius:2px; font-size:1.3rem; font-style:italic; line-height:1.5;">
+                    "I wasted my potential, got too much stress from parents."
+                </div>
+                <div class="quote-slide" style="display:none; background:var(--surface); border:1px solid var(--border); padding:2rem; border-radius:2px; font-size:1.3rem; font-style:italic; line-height:1.5;">
+                    "I don't love myself anymore for it."
+                </div>
+                <div class="quote-slide" style="display:none; background:var(--surface); border:1px solid var(--border); padding:2rem; border-radius:2px; font-size:1.3rem; font-style:italic; line-height:1.5;">
+                    "I have been getting a BDS seat for three years but my parents didn't let me take it because I am an investment for MBBS doctor."
+                </div>
+                <div class="quote-slide" style="display:none; background:var(--surface); border:1px solid var(--border); padding:2rem; border-radius:2px; font-size:1.3rem; font-style:italic; line-height:1.5;">
+                    "I felt suicidal many times."
+                </div>
+                <div class="quote-slide" style="display:none; background:var(--surface); border:1px solid var(--border); padding:2rem; border-radius:2px; font-size:1.3rem; font-style:italic; line-height:1.5;">
+                    "I became antisocial. Towards the end my mind gave out."
+                </div>
+            </div>
+            <button class="carousel-btn next" onclick="nextQuote()" style="background:transparent; border:1px solid var(--border); color:var(--text); padding:0.5rem 1rem; cursor:pointer; font-size:1.5rem;">›</button>
+        </div>
+        <p class="disclaimer" style="margin-top:1.5rem; font-size:0.85rem; color:var(--muted-light);">All responses were collected anonymously. Some quotes have been lightly edited for clarity.</p>
+    </div>
+</section>
+
+</section>
+
+<!-- TELL US YOUR STORY -->
+
+<section id="share-story">
+    <div class="container">
+        <h2>Share Your Story Too</h2>
+        <p class="subtitle">
+            Help expand this ongoing research by contributing your experience.
+        </p>
+
+        <div class="dataset-box">
+            <div class="left">
+                <p>
+                    This research is continuously evolving. Every anonymous response helps build a more comprehensive understanding of how India's competitive entrance exams affect students.
+                </p>
+
+                <p>
+                    If you have prepared for <strong>JEE or NEET</strong>, you're invited to share your experience.
+                </p>
+
+                <p>
+                    <strong>Your response is completely anonymous.</strong> No personally identifying information is collected. New responses are reviewed and incorporated into the analysis, visualizations, and anonymous quotations.
+                </p>
+
+                <p style="margin-top:1rem;">
+                    <strong>This website is updated approximately every two weeks</strong> as the dataset grows, making the findings richer and more representative over time.
+                </p>
+            </div>
+
+            <div class="right">
+                <a href="https://forms.gle/mmsSZjMnVneYWAop8"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Share Your Experience →
+                </a>
+
+                <p style="margin-top:1rem; font-size:0.85rem; color:var(--muted-light);">
+                    Estimated completion time: 2–3 minutes
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- DISCUSSION & LIMITATIONS (replaces recommendations)          -->
+<!-- ============================================================ -->
+<section id="discussion">
+    <div class="container">
+        <h2>Discussion</h2>
+        <p class="subtitle">What the findings suggest about the wider system.</p>
+        <div class="discussion-grid">
+            <div>
+                <h4>Implications</h4>
+                <p>The data consistently show that high parental pressure, extended preparation time, and a narrow focus on academic achievement are associated with poorer long‑term wellbeing — even among those who succeed. This challenges the prevailing narrative that sacrifice is a necessary price for success.</p>
+                <p>Policymakers, educators, and parents should consider interventions that reduce pressure, encourage holistic development, and provide mental health support throughout the preparation journey.</p>
+            </div>
+            <div>
+                <h4>Limitations</h4>
+                <p>This is an exploratory, self‑reported survey with a non‑random sample. The findings are not generalisable to all aspirants. Selection bias may overrepresent those with strong opinions or negative experiences. Causal claims cannot be made from this correlational data.</p>
+                <p>Future work should use representative sampling, longitudinal designs, and objective measures of wellbeing to strengthen the evidence base.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- DATASET & REPRODUCIBILITY                                    -->
+<!-- ============================================================ -->
+
+<section id="cite">
+    <div class="container">
+        <h2>Cite This Work</h2>
+        <p class="subtitle">If you reference this research, please use the citation below.</p>
+        <div class="cite-box">
+            <div class="cite-text" id="citeText">Pandey, S. (2026). The Hidden Cost of Cracking India's Toughest Exams: An Independent Survey of 335 JEE/NEET Aspirants. Retrieved from https://my-project-wheat-psi-60.vercel.app/</div>
+            <button id="citeBtn" onclick="copyCitation()">Copy Citation</button>
+        </div>
+    </div>
+</section>
+
+<section id="dataset">
+    <div class="container">
+        <h2>Dataset &amp; Reproducibility</h2>
+        <p class="subtitle">All data and code are publicly available.</p>
+        <div class="dataset-box">
+            <div class="left">
+                <p><strong>Full dataset</strong> — anonymised responses, codebook, and analysis scripts.</p>
+                <p style="font-size:0.9rem; color:var(--muted-light);">Dataset: <a href="https://github.com/Shaurya-git-bit/Effect-of-JEE-NEET-competitive-entrance-exams-in-india-on-health-of-students" target="_blank" style="color:var(--accent);">github.com/Shaurya-git-bit/...</a></p>
+            </div>
+            <div class="right">
+                <a href="https://github.com/Shaurya-git-bit/Effect-of-JEE-NEET-competitive-entrance-exams-in-india-on-health-of-students" target="_blank">View on GitHub →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ASK THE DATASET (AI assistant section)                       -->
+<!-- ============================================================ -->
+<section id="ask-ai">
+    <div class="container">
+        <div class="ai-section">
+            <div class="ai-header">
+                <h3>Ask the Dataset</h3>
+                <span style="font-size:0.8rem; color:var(--muted-light);">AI‑powered research assistant</span>
+            </div>
+            <div class="ai-desc">
+              <p>Ask the Dataset is an AI research companion built on this survey. It draws from all 335 responses, including 146 anonymous open-ended reflections, to identify patterns, compare groups, explain findings, and surface relevant student quotes.</p>
+              <p>If you're currently preparing for JEE or NEET, you can ask about challenges you're facing. Rather than offering generic advice, Ask the Dataset grounds its responses in the experiences shared by students who faced similar situations — helping connect your questions to real voices from the survey.</p>
+            </div>
+            <button class="ai-launcher" id="aiLauncherBtn">Open Assistant →</button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- RESEARCHER                                                   -->
+<!-- ============================================================ -->
+<section id="researcher">
+    <div class="container researcher-box">
+        <h2>Researcher</h2>
+        <h3>Shaurya Pandey</h3>
+        <div class="bio">
+            <p>Independent researcher with interests in educational policy, student wellbeing, survey research, data analysis, and machine learning. This project was conducted without institutional funding, with the goal of bringing empirical transparency to the conversation around competitive exam preparation in India.</p>
+        </div>
+        <div class="badge-row">
+            <span class="badge">335 Respondents</span>
+            <span class="badge">Independent Research</span>
+            <span class="badge">Data Publicly Available</span>
+            <span class="badge">March–May 2026</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER – expanded, professional                              -->
+<!-- ============================================================ -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4>Research</h4>
+                <ul>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#findings">Findings</a></li>
+                    <li><a href="#discussion">Discussion</a></li>
+                    <li><a href="#dataset">Dataset</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Data &amp; Code</h4>
+                <ul>
+                    <li><a href="https://github.com/Shaurya-git-bit/Effect-of-JEE-NEET-competitive-entrance-exams-in-india-on-health-of-students" target="_blank">GitHub Repository</a></li>
+                    <li><a href="#cite">Citation</a></li>
+                    <li><a href="https://github.com/Shaurya-git-bit/Effect-of-JEE-NEET-competitive-entrance-exams-in-india-on-health-of-students/blob/main/LICENSE" target="_blank">License (MIT)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#researcher">Researcher</a></li>
+                    <li><span style="color: var(--muted);">Contact:</span> <a href="mailto:19shaurya02@gmail.com" style="color: var(--text);">19shaurya02@gmail.com</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Meta</h4>
+                <ul>
+                    <li><span style="color: var(--muted);">Last updated:</span> <span style="color: var(--text);">June 2026</span></li>
+                    <li><a href="https://github.com/Shaurya-git-bit/Effect-of-JEE-NEET-competitive-entrance-exams-in-india-on-health-of-students" target="_blank" style="color:var(--accent);">Dataset on GitHub</a></li>
+                    <li><span style="color: var(--muted);">Data collected:</span> <span style="color: var(--text);">March–May 2026</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="copy">© 2026 Shaurya Pandey · Independent Research</span>
+            <span>All data and code are publicly available under MIT License</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- CHAT DRAWER (identical functionality, new styling)           -->
+<!-- ============================================================ -->
+<div class="chat-drawer" id="chatDrawer">
+    <div class="chat-resize-handle" id="chatResizeHandle"></div>
+    <div class="chat-header">
+        <h4>Ask <span>the Dataset</span></h4>
+        <button class="close-btn" id="chatCloseBtn" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Ask about the research..." autocomplete="off" />
+        <button id="chatSendBtn">Send</button>
+    </div>
+</div>
+
+<!-- CHAT LAUNCHER (subtle, no bubble) -->
+<button class="chat-launcher" id="chatLauncher">
+    <span class="icon"><i data-lucide="database" style="width:18px;height:18px;"></i></span>
+    Ask the Dataset
+</button>
+
+<script>
+/* ================================================================
+   ALL EXISTING JAVASCRIPT – preserved exactly
+   ================================================================ */
+
+/* ---- COUNTERS ---- */
+const counters = document.querySelectorAll(".counter");
+function animateCounters(){
+    counters.forEach(counter=>{
+        const target = parseFloat(counter.dataset.target);
+        let current = 0;
+        const increment = target / 80;
+        const update = ()=>{
+            current += increment;
+            if(current < target){
+                counter.innerText = (target % 1 === 0) ? Math.floor(current)+"%" : current.toFixed(1)+"%";
+                requestAnimationFrame(update);
+            } else {
+                counter.innerText = (target % 1 === 0) ? target+"%" : target.toFixed(1)+"%";
+            }
+        };
+        update();
+    });
+}
+window.addEventListener("load", ()=>{
+    animateCounters();
+    setTimeout(createCharts, 500);
+    // init Lucide icons
+    lucide.createIcons();
+});
+
+/* ---- CHARTS ---- */
+const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            labels: { color: "#8b93a8", font: { family: "Inter", size: 12 } }
+        }
+    },
+    scales: {
+        x: {
+            ticks: { color: "#5a6278" },
+            grid: { color: "rgba(255,255,255,0.05)" }
+        },
+        y: {
+            ticks: { color: "#5a6278" },
+            grid: { color: "rgba(255,255,255,0.05)" }
+        }
+    }
+};
+
+let chartsCreated = false;
+function createCharts(){
+    if(chartsCreated) return;
+    chartsCreated = true;
+
+    // Burnout
+    new Chart(document.getElementById("burnoutChart"), {
+        type: "bar",
+        data: {
+            labels: ["Low", "Moderate", "High", "Very High"],
+            datasets: [{
+                label: "Burnout (%)",
+                data: [60, 76, 88, 93],
+                backgroundColor: "#d97746",
+                borderRadius: 2,
+                barThickness: 40
+            }]
+        },
+        options: chartOptions
+    });
+
+    // Satisfaction
+    new Chart(document.getElementById("satisfactionChart"), {
+        type: "bar",
+        data: {
+            labels: ["Low", "Moderate", "High", "Very High"],
+            datasets: [{
+                label: "Career Satisfaction (/5)",
+                data: [2.72, 2.52, 2.42, 2.09],
+                backgroundColor: "#d97746",
+                borderRadius: 2,
+                barThickness: 40
+            }]
+        },
+        options: chartOptions
+    });
+
+    // Skills
+    new Chart(document.getElementById("skillsChart"), {
+        type: "bar",
+        data: {
+            labels: ["No Skills", "With Skills"],
+            datasets: [
+                {
+                    label: "Career Satisfaction",
+                    data: [2.27, 2.87],
+                    backgroundColor: "#d97746",
+                    borderRadius: 2,
+                    barThickness: 40
+                },
+                {
+                    label: "Social Confidence",
+                    data: [2.33, 3.31],
+                    backgroundColor: "#b05f30",
+                    borderRadius: 2,
+                    barThickness: 40
+                }
+            ]
+        },
+        options: chartOptions
+    });
+
+    // Regret
+    new Chart(document.getElementById("regretChart"), {
+        type: "bar",
+        data: {
+            labels: ["0 Years", "1 Year", "2 Years", "3+ Years"],
+            datasets: [{
+                label: "Reported Regret (%)",
+                data: [45, 75, 72, 80],
+                backgroundColor: "#d97746",
+                borderRadius: 2,
+                barThickness: 40
+            }]
+        },
+        options: chartOptions
+    });
+}
+
+// Intersection Observer for charts
+const findingsSection = document.querySelector("#findings");
+const observerCharts = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting) createCharts();
+    });
+}, { threshold: 0.8 });
+observerCharts.observe(findingsSection);
+
+/* ---- CAROUSEL ---- */
+let currentQuote = 0;
+const quotes = document.querySelectorAll(".quote-slide");
+function showQuote(index){
+    quotes.forEach(q => q.style.display = "none");
+    quotes[index].style.display = "block";
+    quotes[index].classList.add("active");
+}
+function nextQuote(){
+    currentQuote = (currentQuote + 1) % quotes.length;
+    showQuote(currentQuote);
+}
+function previousQuote(){
+    currentQuote = (currentQuote - 1 + quotes.length) % quotes.length;
+    showQuote(currentQuote);
+}
+// auto-advance
+setInterval(nextQuote, 4000);
+// swipe support
+let startX = 0;
+const carousel = document.querySelector(".carousel");
+carousel.addEventListener("touchstart", e => { startX = e.touches[0].clientX; });
+carousel.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
+    if(startX - endX > 50) nextQuote();
+    if(endX - startX > 50) previousQuote();
+});
+
+/* ---- PROGRESS BAR ---- */
+window.addEventListener("scroll", function(){
+    const winScroll = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById("progress-bar").style.width = scrolled + "%";
+});
+
+/* ---- FADE-UP ANIMATION FOR FINDINGS ---- */
+const findings = document.querySelectorAll(".finding");
+const observerFade = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting) {
+            entry.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.15 });
+findings.forEach(f => observerFade.observe(f));
+
+/* ---- COPY CITATION ---- */
+function copyCitation() {
+    const citation = `Pandey, S. (2026). The Hidden Cost of Cracking India's Toughest Exams: An Independent Survey of 335 JEE/NEET Aspirants. Retrieved from ${window.location.href}`;
+    function showCopied() {
+        document.querySelectorAll('.social-btn.citation, #citeBtn').forEach(btn => {
+            const original = btn.textContent;
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = original, 2000);
+        });
+    }
+    navigator.clipboard.writeText(citation).then(showCopied).catch(() => {
+        const textarea = document.createElement("textarea");
+        textarea.value = citation;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        showCopied();
+    });
+}
+
+/* ---- CHATBOT (EXACT LOGIC – DO NOT CHANGE) ---- */
+document.addEventListener('DOMContentLoaded', function() {
+    const launcher = document.getElementById('chatLauncher');
+    const drawer = document.getElementById('chatDrawer');
+    const closeBtn = document.getElementById('chatCloseBtn');
+    const messages = document.getElementById('chatMessages');
+    const input = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('chatSendBtn');
+    let isOpen = false;
+    let isWaiting = false;
+    let history = [];
+
+    function toggleChat() {
+        isOpen = !isOpen;
+        drawer.classList.toggle('open', isOpen);
+        launcher.classList.toggle('open', isOpen);
+        if (isOpen) input.focus();
+    }
+
+    launcher.addEventListener('click', toggleChat);
+    closeBtn.addEventListener('click', toggleChat);
+
+    function addMsg(role, text) {
+        const div = document.createElement('div');
+        div.className = 'message ' + role;
+        div.textContent = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function showTyping() {
+        const div = document.createElement('div');
+        div.className = 'typing-indicator';
+        div.id = 'typingIndicator';
+        div.innerHTML = '<span></span><span></span><span></span>';
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function hideTyping() {
+        const el = document.getElementById('typingIndicator');
+        if (el) el.remove();
+    }
+
+    async function sendMessage() {
+        const text = input.value.trim();
+        if (!text || isWaiting) return;
+
+        history.push({ role: 'user', content: text });
+        addMsg('user', text);
+        input.value = '';
+        sendBtn.disabled = true;
+        isWaiting = true;
+        showTyping();
+
+        try {
+            const res = await fetch('https://behind-the-scenes-ten.vercel.app/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: history })
+            });
+            if (!res.ok) {
+                const errText = await res.text();
+                throw new Error(errText);
+            }
+            hideTyping();
+            const data = await res.json();
+            const assistantDiv = document.createElement('div');
+            assistantDiv.className = 'message assistant';
+            assistantDiv.textContent = data.reply || 'No response';
+            messages.appendChild(assistantDiv);
+            history.push({ role: 'assistant', content: data.reply || '' });
+            messages.scrollTop = messages.scrollHeight;
+        } catch (err) {
+            console.error(err);
+            alert(err.message);
+            hideTyping();
+            const fallback = "I'm having trouble connecting. Please try again later.";
+            history.push({ role: 'assistant', content: fallback });
+            addMsg('assistant', fallback);
+        } finally {
+            isWaiting = false;
+            sendBtn.disabled = false;
+            input.focus();
+        }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    // welcome message
+    setTimeout(function() {
+        const welcome = "Hi, I'm 335 Voices. Ask me anything about the survey data or findings.";
+        history.push({ role: 'assistant', content: welcome });
+        addMsg('assistant', welcome);
+    }, 600);
+
+    /* RESIZE HANDLE */
+    const handle = document.getElementById('chatResizeHandle');
+    let isResizing = false;
+    let startX_pos = 0;
+    let startWidth = 0;
+
+    function doResize(e) {
+        if (!isResizing) return;
+        const newX = e.clientX;
+        const delta = startX_pos - newX;
+        let newWidth = startWidth + delta;
+        const vw = window.innerWidth;
+        const minW = vw * 0.30;
+        const maxW = vw * 0.70;
+        if (newWidth < minW) newWidth = minW;
+        if (newWidth > maxW) newWidth = maxW;
+        drawer.style.width = newWidth + 'px';
+        drawer.style.minWidth = newWidth + 'px';
+        drawer.style.maxWidth = newWidth + 'px';
+    }
+
+    function stopResize() {
+        isResizing = false;
+        document.body.style.cursor = 'default';
+        handle.classList.remove('active');
+        document.removeEventListener('mousemove', doResize);
+        document.removeEventListener('mouseup', stopResize);
+    }
+
+    handle.addEventListener('mousedown', function(e) {
+        isResizing = true;
+        startX_pos = e.clientX;
+        startWidth = drawer.getBoundingClientRect().width;
+        document.body.style.cursor = 'ew-resize';
+        handle.classList.add('active');
+        document.addEventListener('mousemove', doResize);
+        document.addEventListener('mouseup', stopResize);
+        e.preventDefault();
+    });
+
+    // Also add listener for the AI launcher button in the section
+    document.getElementById('aiLauncherBtn').addEventListener('click', function() {
+        if (!isOpen) toggleChat();
+    });
+});
+</script>
+</body>
+</html>
